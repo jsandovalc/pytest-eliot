@@ -1,0 +1,6 @@
+site_name: pytest-eliot Documentation
+
+nav:
+  - Home: index.md
+  - Testing your logging: testing.md
+theme: readthedocs
