@@ -85,6 +85,27 @@ def test_badpath(eliot_capture_logging):
 
 ## Testing Message and Action Structure
 
+`pytest-eliot` provides utilities for making assertions about the structure of
+individual messages and actions. The simplest method is using the
+`eliot_has_message` utility function which asserts that a message of a given
+message type has the given fields:
+
+``` python
+def test_registration(eliot_capture_logging, eliot_has_message):
+    with eliot_capture_logging() as logger:
+        registry = UserRegistration()
+        registry.register("john", "password", 12)
+
+        assert eliot_has_message(
+            logger, message_type="user_registration",
+            fields={
+                "username": "john",
+                "password:" "password",
+                "age": 12
+            }
+        )
+```
+
 ## Custom JSON encoding
 
 ## Custom testing setup
