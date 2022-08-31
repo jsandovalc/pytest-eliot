@@ -25,7 +25,7 @@ def eliot_capture_logging(eliot_test_logger) -> ContextManager:
     @contextmanager
     def _capture_logging(encoder=None) -> Iterator[None]:
         if encoder:
-            eliot_test_logger._encoder = encoder()
+            eliot_test_logger._encoder = encoder
 
         original_logger = swap_logger(eliot_test_logger)
 
