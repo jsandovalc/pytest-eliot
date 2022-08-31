@@ -62,5 +62,5 @@ def test_has_message(eliot_capture_logging, eliot_has_message):
 def test_failed_message():
     pass
 
-def test_has_action(eliot_capture_loggin, eliot_has_action):
+def test_has_action(eliot_capture_logging):
     pass

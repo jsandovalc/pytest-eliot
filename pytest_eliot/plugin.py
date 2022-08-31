@@ -4,6 +4,7 @@ from eliot.testing import swap_logger, check_for_errors, LoggedMessage
 from eliot import MemoryLogger
 from typing import ContextManager, Iterator
 from contextlib import contextmanager
+from eliot.json import EliotJSONEncoder
 
 
 @pytest.fixture
@@ -22,7 +23,10 @@ def eliot_capture_logging(eliot_test_logger) -> ContextManager:
 
     """
     @contextmanager
-    def _capture_logging() -> Iterator[None]:
+    def _capture_logging(encoder=None) -> Iterator[None]:
+        if encoder:
+            eliot_test_logger._encoder = encoder()
+
         original_logger = swap_logger(eliot_test_logger)
 
         try:
@@ -32,6 +36,7 @@ def eliot_capture_logging(eliot_test_logger) -> ContextManager:
             check_for_errors(eliot_test_logger)
 
     return _capture_logging
+
 
 @pytest.fixture
 def eliot_has_message():
